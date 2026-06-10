@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduMap — Recomendação Inteligente de Cursos SISU</title>
+  <meta name="description" content="Descubra os cursos do SISU com maior chance de aprovação para o seu perfil ENEM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">Edu</span><span class="brand-mark accent">Map</span>
+    </div>
+    <div class="tagline">Recomendação inteligente de cursos SISU</div>
+  </header>
+
+  <main class="shell">
+    <section class="card" id="app">
+      <!-- progresso -->
+      <div class="progress" aria-hidden="true">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+
+      <!-- Etapa 1 -->
+      <section class="step" data-step="1">
+        <h1>Qual é o seu principal objetivo?</h1>
+        <div class="options" data-field="objetivo">
+          <button class="option" data-value="Primeira graduação">Primeira graduação</button>
+          <button class="option" data-value="Segunda graduação">Segunda graduação</button>
+          <button class="option" data-value="Transferência">Transferência</button>
+          <button class="option" data-value="Treino ENEM">Treino ENEM</button>
+        </div>
+      </section>
+
+      <!-- Etapa 2 -->
+      <section class="step" data-step="2" hidden>
+        <h1>Qual área profissional mais te interessa?</h1>
+        <div class="options" data-field="interesse">
+          <button class="option" data-value="Tecnologia">Tecnologia</button>
+          <button class="option" data-value="Engenharias">Engenharias</button>
+          <button class="option" data-value="Saúde">Saúde</button>
+          <button class="option" data-value="Educação">Educação</button>
+          <button class="option" data-value="Negócios">Negócios</button>
+          <button class="option" data-value="Direito">Direito</button>
+          <button class="option" data-value="Não tenho preferência">Não tenho preferência</button>
+        </div>
+      </section>
+
+      <!-- Etapa 3 -->
+      <section class="step" data-step="3" hidden>
+        <h1>Informe suas notas do ENEM</h1>
+        <p class="hint">Valores entre 0 e 1000.</p>
+        <form class="grid-notas" id="form-notas" novalidate>
+          <label>Matemática<input type="number" min="0" max="1000" step="0.1" name="matematica" required /></label>
+          <label>Ciências Humanas<input type="number" min="0" max="1000" step="0.1" name="humanas" required /></label>
+          <label>Ciências da Natureza<input type="number" min="0" max="1000" step="0.1" name="natureza" required /></label>
+          <label>Linguagens<input type="number" min="0" max="1000" step="0.1" name="linguagens" required /></label>
+          <label>Redação<input type="number" min="0" max="1000" step="0.1" name="redacao" required /></label>
+        </form>
+        <div class="actions">
+          <button class="btn ghost" data-action="back">Voltar</button>
+          <button class="btn primary" data-action="next-notas">Continuar</button>
+        </div>
+      </section>
+
+      <!-- Etapa 4 -->
+      <section class="step" data-step="4" hidden>
+        <h1>Qual grau deseja cursar?</h1>
+        <div class="options" data-field="grau">
+          <button class="option" data-value="Bacharelado">Bacharelado</button>
+          <button class="option" data-value="Licenciatura">Licenciatura</button>
+          <button class="option" data-value="Tecnológico">Tecnológico</button>
+          <button class="option" data-value="Abi">Área Básica de Ingresso (ABI)</button>
+        </div>
+      </section>
+
+      <!-- Etapa 5 -->
+      <section class="step" data-step="5" hidden>
+        <h1>Qual modalidade de concorrência?</h1>
+        <div class="options" data-field="modalidade">
+          <button class="option" data-value="Ampla Concorrência">Ampla Concorrência</button>
+          <button class="option" data-value="Cotas">Cotas</button>
+        </div>
+      </section>
+
+      <!-- Etapa 6 -->
+      <section class="step" data-step="6" hidden>
+        <h1>Resumo</h1>
+        <ul class="summary" id="summary"></ul>
+        <div class="actions">
+          <button class="btn ghost" data-action="back">Voltar</button>
+          <button class="btn primary" id="btn-gerar">Gerar Recomendações</button>
+        </div>
+      </section>
+
+      <!-- Loading -->
+      <section class="step center" data-step="loading" hidden>
+        <div class="spinner" aria-label="Carregando"></div>
+        <p>Consultando o modelo de IA...</p>
+      </section>
+
+      <!-- Erro -->
+      <section class="step" data-step="error" hidden>
+        <h1>Algo deu errado</h1>
+        <p class="error-msg" id="error-msg"></p>
+        <div class="actions">
+          <button class="btn primary" data-action="retry">Tentar novamente</button>
+        </div>
+      </section>
+
+      <!-- Resultado -->
+      <section class="step" data-step="result" hidden>
+        <h1>Suas Recomendações</h1>
+        <p class="perfil" id="perfil-text"></p>
+        <ol class="results" id="results"></ol>
+        <div class="actions">
+          <button class="btn ghost" data-action="restart">Recomeçar</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <small>EduMap · Modelo XGBoost treinado com dados SISU 2023/1</small>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
