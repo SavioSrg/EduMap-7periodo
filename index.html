@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
   <header class="topbar">
     <div class="brand">
@@ -19,7 +21,27 @@
   </header>
 
   <main class="shell">
-    <section class="card" id="app">
+    <section class="hero-section" data-field="intro" data-step="0">
+      <h1>Descubra suas chances de conquistar uma vaga no ensino superior público</h1>
+      <p>
+        O <strong>EduMap</strong> é uma plataforma desenvolvida por estudantes de Sistemas de Informação da PUC Minas
+        para apoiar você na jornada rumo à universidade pública. Unindo tecnologia e educação, nossa ferramenta utiliza
+        um modelo de inteligência artificial (<strong>XGBoost</strong>) treinado com os dados oficiais do SISU para
+        analisar o seu cenário.
+      </p>
+      <p>
+        Ao cruzar suas notas com o histórico real de concorrência, o sistema calcula de forma inteligente as suas
+        chances reais de aprovação em universidades públicas de Minas Gerais. Chega de incertezas e cálculos manuais
+        complexos: o mapeamento do seu futuro acadêmico está a apenas alguns cliques de distância.
+      </p>
+      <p class="cta-text">
+        <strong>Pronto(a) para dar o próximo passo na sua jornada de estudos? </br>
+          Clique no botão abaixo para simular suas chances!</strong>
+      </p>
+      <button type="button" class="btn primary" data-action="start-app">Começar Agora</button>
+    </section>
+
+    <section class="card" id="app" hidden>
       <!-- progresso -->
       <div class="progress" aria-hidden="true">
         <div class="progress-bar" id="progress-bar"></div>
@@ -34,6 +56,9 @@
           <button class="option" data-value="Transferência">Transferência</button>
           <button class="option" data-value="Treino ENEM">Treino ENEM</button>
         </div>
+        <div class="actions">
+            <button class="btn ghost" data-action="back">Voltar</button>
+          </div>
       </section>
 
       <!-- Etapa 2 -->
@@ -47,6 +72,9 @@
           <button class="option" data-value="Negócios">Negócios</button>
           <button class="option" data-value="Direito">Direito</button>
           <button class="option" data-value="Não tenho preferência">Não tenho preferência</button>
+          <div class="actions">
+            <button class="btn ghost" data-action="back">Voltar</button>
+          </div>
         </div>
       </section>
 
@@ -57,7 +85,8 @@
         <form class="grid-notas" id="form-notas" novalidate>
           <label>Matemática<input type="number" min="0" max="1000" step="0.1" name="matematica" required /></label>
           <label>Ciências Humanas<input type="number" min="0" max="1000" step="0.1" name="humanas" required /></label>
-          <label>Ciências da Natureza<input type="number" min="0" max="1000" step="0.1" name="natureza" required /></label>
+          <label>Ciências da Natureza<input type="number" min="0" max="1000" step="0.1" name="natureza"
+              required /></label>
           <label>Linguagens<input type="number" min="0" max="1000" step="0.1" name="linguagens" required /></label>
           <label>Redação<input type="number" min="0" max="1000" step="0.1" name="redacao" required /></label>
         </form>
@@ -76,6 +105,9 @@
           <button class="option" data-value="Tecnológico">Tecnológico</button>
           <button class="option" data-value="Abi">Área Básica de Ingresso (ABI)</button>
         </div>
+        <div class="actions">
+            <button class="btn ghost" data-action="back">Voltar</button>
+          </div>
       </section>
 
       <!-- Etapa 5 -->
@@ -85,6 +117,9 @@
           <button class="option" data-value="Ampla Concorrência">Ampla Concorrência</button>
           <button class="option" data-value="Cotas">Cotas</button>
         </div>
+        <div class="actions">
+            <button class="btn ghost" data-action="back">Voltar</button>
+          </div>
       </section>
 
       <!-- Etapa 6 -->
@@ -131,4 +166,5 @@
   <script src="config.js"></script>
   <script src="app.js"></script>
 </body>
+
 </html>

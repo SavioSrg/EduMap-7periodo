@@ -9,8 +9,8 @@
     modalidade: null,
   };
 
-  const TOTAL_STEPS = 6;
-  let currentStep = 1;
+  const TOTAL_STEPS = 7;
+  let currentStep = 0;
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -83,7 +83,14 @@
   }
 
   function goBack() {
-    if (currentStep > 1) showStep(currentStep - 1);
+    if (currentStep >= 0) showStep(currentStep - 1);
+    if (currentStep == 1) {
+      const intro = $(".hero-section");
+      const cardSection = $(".card");
+
+      if (intro) intro.hidden = false; 
+      if (cardSection) cardSection.hidden = true; 
+    }
   }
 
   async function gerarRecomendacoes() {
@@ -157,6 +164,17 @@
       if (e.target.id === "btn-gerar") return gerarRecomendacoes();
       return;
     }
+    if (action === "start-app") {
+      // Oculta a seção de introdução para dar foco ao questionário
+      const intro = $(".hero-section");
+      const cardSection = $(".card");
+
+      if (intro) intro.hidden = true; 
+      
+      if (cardSection) cardSection.hidden = false; 
+      showStep(1);
+      return;
+    }
     if (action === "back") return goBack();
     if (action === "next-notas") {
       if (validateNotas()) showStep(4);
@@ -170,5 +188,5 @@
     if (action === "restart") return reset();
   });
 
-  showStep(1);
+  // showStep(1);
 })();
