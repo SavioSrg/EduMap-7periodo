@@ -83,7 +83,6 @@
   }
 
   function goBack() {
-    if (currentStep >= 0) showStep(currentStep - 1);
     if (currentStep == 1) {
       const intro = $(".hero-section");
       const cardSection = $(".card");
@@ -91,6 +90,7 @@
       if (intro) intro.hidden = false; 
       if (cardSection) cardSection.hidden = true; 
     }
+    if (currentStep >= 0) showStep(currentStep - 1);
   }
 
   async function gerarRecomendacoes() {
